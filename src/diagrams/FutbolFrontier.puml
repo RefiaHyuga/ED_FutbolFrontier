@@ -1,0 +1,92 @@
+@startuml Futbolfrontier
+class Equipo {
+    - nombre : String
+    - ciudad : String
+    - puntos : int
+    - golesAFavor : int
+    - golesEnContra : int
+
+    + Equipo(nombre : String, ciudad : String)
+    + getNombre() : String
+    + getCiudad() : String
+    + getPuntos() : int
+    + setPuntos(puntos : int) : void
+    + getGolesAFavor() : int
+    + setGolesAFavor(gf : int) : void
+    + getGolesEnContra() : int
+    + setGolesEnContra(gc : int) : void
+    + getDiferenciaDeGoles() : int
+    + toString() : String
+}
+
+class FutbolFrontier {
+    - static scanner : Scanner
+    - static liga : Liga
+
+    + main(args : String[]) : void
+    - mostrarMenu() : void
+    - registrarEquipo() : void
+    - registrarPartido() : void
+    - buscarEquipo() : void
+    - obtenerEquipo(nombre : String) : Equipo
+}
+
+class Liga {
+    - equipos : List<Equipo>
+    - partidos : List<Partido>
+
+    + Liga()
+    + registrarEquipo(equipo : Equipo) : void
+    + registrarPartido(partido : Partido) : void
+    + mostrarClasificacion() : void
+    + buscarEquipoPorNombre(nombre : String) : void
+    + listarPartidos() : void
+    + getEquipos() : List<Equipo>
+    + setEquipos(equipos : List<Equipo>) : void
+    + getPartidos() : List<Partido>
+    + setPartidos(partidos : List<Partido>) : void
+}
+
+class Partido {
+    - equipoLocal : Equipo
+    - equipoVisitante : Equipo
+    - golesLocal : int
+    - golesVisitante : int
+    - fecha : Date
+
+    + Partido(equipoLocal : Equipo, equipoVisitante : Equipo,
+              golesLocal : int, golesVisitante : int, fecha : Date)
+
+    + registrarPartido() : void
+    + toString() : String
+
+    + getEquipoLocal() : Equipo
+    + setEquipoLocal(equipoLocal : Equipo) : void
+
+    + getEquipoVisitante() : Equipo
+    + setEquipoVisitante(equipoVisitante : Equipo) : void
+
+    + getGolesLocal() : int
+    + setGolesLocal(golesLocal : int) : void
+
+    + getGolesVisitante() : int
+    + setGolesVisitante(golesVisitante : int) : void
+
+    + getFecha() : Date
+    + setFecha(fecha : Date) : void
+}
+
+
+' Relaciones
+FutbolFrontier --> Liga : usa
+FutbolFrontier --> Equipo : crea/usa
+FutbolFrontier --> Partido : crea
+Liga "1" o-- "*" Equipo : contiene >
+Liga "1" o-- "*" Partido : contiene >
+Partido --> Equipo : equipo local
+Partido --> Equipo : equipo visitante
+@enduml
+
+
+
+
